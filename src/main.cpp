@@ -30,6 +30,7 @@ int main() {
   s_sio.gpio_oe = 1 << 25;
   s_sio.gpio_out = 1 << 25;
 
-  while (true) {}
+  while (true) {
+  }
   return 0;
 }
