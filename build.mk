@@ -35,3 +35,13 @@ LOCAL_STATIC_LIBS := \
     libcortex_m_startup
 include $(BUILD_BINARY)
 
+$(BUILD_TARGET_DIR)/rp2040_app.hex: $(BUILD_TARGET_DIR)/rp2040_app
+	$(call print-build-header, $(notdir $@), objcopy)
+	$(SILENT)arm-none-eabi-objcopy -O ihex $^ $@
+
+$(BUILD_TARGET_DIR)/rp2040_app.uf2: INTERNAL_LOCAL_DIR := $(LOCAL_DIR)
+$(BUILD_TARGET_DIR)/rp2040_app.uf2: $(BUILD_TARGET_DIR)/rp2040_app.hex
+	$(call print-build-header, $(notdir $@), uf2conv)
+	$(SILENT)$(INTERNAL_LOCAL_DIR)/uf2conv.py -c -f rp2040 -o $@ $^ > /dev/null
+
+all_targets: $(BUILD_TARGET_DIR)/rp2040_app.uf2
