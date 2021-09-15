@@ -19,7 +19,7 @@ jobs:
         checkout-deps: true
         generated-manifest: 'manifest.xml'
     - name: arm-none-eabi-gcc
-      uses: fiam/arm-none-eabi-gcc@v1.0.3
+      uses: fiam/arm-none-eabi-gcc@v1.0.4
       with:
         release: '9-2020-q2'
     - name: make
